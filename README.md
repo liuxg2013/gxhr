@@ -33,12 +33,6 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
  */
 
 使用demo ??
-这里是介绍我们项目常见的XMLHttpRequest异步请求的用法，先来封装一下，让它和jquery ajax使用差不多,封装的文件为gxhr.js,在github上
-
-```
-https://github.com/liuxg2013/gxhr/
-```
-欢迎点赞，下面看看用法？？
 
 get方式提交数据
 ```
