@@ -2,6 +2,7 @@
 javascript请求http协议，可以传输xml，二进制，json，字符串，document数据
 
 组件配置参数和说明如下
+
 /**
  *
  * 参数如下：
@@ -31,7 +32,9 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
  * 
  * 返回参数：
  * 返回XMLHttpRequest对象
+ * 
  */
+
 
 使用demo ??
 
