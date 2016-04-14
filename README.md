@@ -1,11 +1,10 @@
 # gxhr
 javascript请求http协议，可以传输xml，二进制，json，字符串，document数据
-@author liuxg
 
+组件配置参数和说明如下
 /**
- * 封装XMLHttpRequest对象，XMLHttpRequest
- * api参考http://blog.csdn.net/yingxiake/article/details/50981265 
- * 参数如下 
+ *
+ * 参数如下：
  * url - >请求路径 
  * type - > 请求方法类型get or post 
  * async - > boolean是否异步，默认是true异步 
@@ -20,6 +19,7 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
  * data 为请求的返回数据， 
  * flag 有来区分xmlHttpRequest，upload事件还是downlaod事件还是全局事件 
  * event 事件对象 
+ * 
  * 事件如下： 
  * timeout 超时的回调，必须手动设置wtimeout才会触发 
  * readystatechange 对象状态改有UNSENT,OPENED,HEADERS_RECEIVED,LOADING,DONE对应的value是0，1，2，3，4 
@@ -28,7 +28,8 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
  * error 请求失败的回调 
  * progress进度回调，根据flag为upload还是download来区分是上传进度还是下载进度 
  * complete 请求完成的回调，不管请求成功或者失败
- * 返回数据
+ * 
+ * 返回参数：
  * 返回XMLHttpRequest对象
  */
 
@@ -175,19 +176,19 @@ fd.append("file",file); //模拟表单提交
 			});
 //后台用springmvc接收数据
 @RequestMapping("/xmlHttpRequest")
-	@ResponseBody
-	public String xmlHttpRequest(MultipartFile file,String name,Integer age ,HttpServletRequest req ,HttpServletResponse res) throws IOException{
-		
-		File tfile = FileUtil.makefile("D:\\upload\\20160325\\color.png");
-	    FileUtils.copyInputStreamToFile(file.getInputStream(), tfile);
-		System.out.println(req.getContentType());
-		
-		JSONObject kk = new JSONObject();
-		kk.put("name", name);
-		kk.put("age", age);
-		
-		return kk.toString() ;
-	}
+@ResponseBody
+public String xmlHttpRequest(MultipartFile file,String name,Integer age ,HttpServletRequest req ,HttpServletResponse res) throws IOException{
+	
+	File tfile = FileUtil.makefile("D:\\upload\\20160325\\color.png");
+    FileUtils.copyInputStreamToFile(file.getInputStream(), tfile);
+	System.out.println(req.getContentType());
+	
+	JSONObject kk = new JSONObject();
+	kk.put("name", name);
+	kk.put("age", age);
+	
+	return kk.toString() ;
+}
 ```
 3. 利用send(blod) ，利用FileReader.readAsArrayBuffer来获取二进制数据上传
 
@@ -200,46 +201,46 @@ var $file = document.getElementById("myfile");
 var reader = new FileReader();
 
 reader.onload = function(ev){ //读取完成触发
-  var result = reader.result;
-  window.gxhr({
-		
-		url : "/whats/task/xmlHttpRequest",
-		data : result,
-		dataType : "json",
-		success : function(data,ev,xhr){
-		    this.getAllResponseHeaders();//获取所有响应头
-		    this.getResponseHeader("content-type"); //根据key获取响应头
-			console.log("success");
-		},
-		error : function(ev){
-			console.log("error");
-		}
-		
-	});
+var result = reader.result;
+window.gxhr({
+	
+	url : "/whats/task/xmlHttpRequest",
+	data : result,
+	dataType : "json",
+	success : function(data,ev,xhr){
+	    this.getAllResponseHeaders();//获取所有响应头
+	    this.getResponseHeader("content-type"); //根据key获取响应头
+		console.log("success");
+	},
+	error : function(ev){
+		console.log("error");
+	}
+	
+});
 }
 
 $file.onchange = function(){
 	
-	var file = $file.files[0]; //获取文件对象file,file继承Blob对象  
+    var file = $file.files[0]; //获取文件对象file,file继承Blob对象  
     reader.readAsArrayBuffer(file); //已文本的方式读取
 	
 };
 
 //后台用springmvc
 @RequestMapping("/xmlHttpRequest")
-	@ResponseBody
-	public String xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException{
-		
-		File tfile = FileUtil.makefile("D:\\upload\\20160325\\color.png");
-	    FileUtils.copyInputStreamToFile(req.getInputStream(), tfile);
-		System.out.println(req.getContentType());
-		
-		JSONObject kk = new JSONObject();
-		kk.put("name", name);
-		kk.put("age", age);
-		
-		return kk.toString() ;
-	}
+@ResponseBody
+public String xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException{
+	
+	File tfile = FileUtil.makefile("D:\\upload\\20160325\\color.png");
+    FileUtils.copyInputStreamToFile(req.getInputStream(), tfile);
+	System.out.println(req.getContentType());
+	
+	JSONObject kk = new JSONObject();
+	kk.put("name", name);
+	kk.put("age", age);
+	
+	return kk.toString() ;
+}
 
 ```
 
@@ -284,13 +285,13 @@ document.getElementById("abort").onclick = function() {
 
 //springmvc代码
 @RequestMapping("/xmlHttpRequest")
-	@ResponseBody
-	public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException{
-		
-		File tfile = FileUtil.makefile("D:\\upload\\20160325\\color.zip");
-	  FileUtils.copyInputStreamToFile(req.getInputStream(), tfile);
+@ResponseBody
+public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException{
 	
-	}
+	File tfile = FileUtil.makefile("D:\\upload\\20160325\\color.zip");
+  FileUtils.copyInputStreamToFile(req.getInputStream(), tfile);
+
+}
    
 ```
 
@@ -344,10 +345,10 @@ document.getElementById("abort").onclick = function() {
 }
 //springmvc代码
 @RequestMapping("/xmlHttpRequest")
-	@ResponseBody
-	public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException{
-	return FileCopyUtils.copyToByteArray(new File("D:\\SOFEWARE\\color.png"));
-	}
+@ResponseBody
+public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException{
+return FileCopyUtils.copyToByteArray(new File("D:\\SOFEWARE\\color.png"));
+}
 ```
 
 3. 请求参数为xml
@@ -385,15 +386,15 @@ document.getElementById("mybutton").onclick = function() {
 
 //springmvc解析xml流
 @RequestMapping("/xmlHttpRequest")
-	@ResponseBody
-	public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException, ParserConfigurationException, SAXException{
-		System.out.println(req.getContentType());
-		InputStream is = req.getInputStream();
-		DocumentBuilderFactory domfac = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dombuilder = domfac.newDocumentBuilder();
-		Document doc = dombuilder.parse(is);
-		Element root = doc.getDocumentElement();
-	}
+@ResponseBody
+public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) throws IOException, ParserConfigurationException, SAXException{
+	System.out.println(req.getContentType());
+	InputStream is = req.getInputStream();
+	DocumentBuilderFactory domfac = DocumentBuilderFactory.newInstance();
+	DocumentBuilder dombuilder = domfac.newDocumentBuilder();
+	Document doc = dombuilder.parse(is);
+	Element root = doc.getDocumentElement();
+}
 
 ```
 
