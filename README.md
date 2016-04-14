@@ -3,9 +3,8 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
 
 组件配置参数和说明如下
 
-/**
- *
- * 参数如下：
+ 参数如下：
+ 
  * url - >请求路径 
  * type - > 请求方法类型get or post 
  * async - > boolean是否异步，默认是true异步 
@@ -20,8 +19,9 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
  * data 为请求的返回数据， 
  * flag 有来区分xmlHttpRequest，upload事件还是downlaod事件还是全局事件 
  * event 事件对象 
- * 
- * 事件如下： 
+ 
+ 事件如下： 
+
  * timeout 超时的回调，必须手动设置wtimeout才会触发 
  * readystatechange 对象状态改有UNSENT,OPENED,HEADERS_RECEIVED,LOADING,DONE对应的value是0，1，2，3，4 
  * beforeSend 请求之前的回调
@@ -29,13 +29,11 @@ javascript请求http协议，可以传输xml，二进制，json，字符串，do
  * error 请求失败的回调 
  * progress进度回调，根据flag为upload还是download来区分是上传进度还是下载进度 
  * complete 请求完成的回调，不管请求成功或者失败
- * 
+ 
  * 返回参数：
+ 
  * 返回XMLHttpRequest对象
- * 
- */
-
-
+ 
 使用demo ??
 
 get方式提交数据
