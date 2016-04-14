@@ -53,7 +53,7 @@ window.gxhr({
 ```
 用post方式提交数据
 
-1. 提交json数据
+提交json数据
 
 ```
 window.gxhr({
@@ -70,7 +70,7 @@ window.gxhr({
 			
 		});
 ```
-2. post提交表单
+post提交表单
 
 ```
 //前段代码
@@ -114,7 +114,7 @@ document.getElementById("mybutton").onclick = function(){
 	}
 ```
 
-3. 利用send(blod) ，直接读取input type = file 标签上传文件
+利用send(blod) ，直接读取input type = file 标签上传文件
 
 ```
 //前段代码
@@ -151,7 +151,7 @@ var file = document.getElementById("myfile").files[0];
 		return kk.toString() ;
 	}
 ```
-4. 利用send(blod) 以及FormData上传文件
+利用send(blod) 以及FormData上传文件
 
 ```
 //前段代码
@@ -191,7 +191,7 @@ public String xmlHttpRequest(MultipartFile file,String name,Integer age ,HttpSer
 	return kk.toString() ;
 }
 ```
-3. 利用send(blod) ，利用FileReader.readAsArrayBuffer来获取二进制数据上传
+利用send(blod) ，利用FileReader.readAsArrayBuffer来获取二进制数据上传
 
 ```
 //前段代码
@@ -245,7 +245,7 @@ public String xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) th
 
 ```
 
-3. 利用progress上传文件，并读进度
+利用progress上传文件，并读进度
 
 ```
 //前段代码
@@ -296,7 +296,7 @@ public byte[] xmlHttpRequest(HttpServletRequest req ,HttpServletResponse res) th
    
 ```
 
-3. 利用progress下载文件，并读取下载进度
+利用progress下载文件，并读取下载进度
 
 ```
 //前段代码
@@ -352,7 +352,7 @@ return FileCopyUtils.copyToByteArray(new File("D:\\SOFEWARE\\color.png"));
 }
 ```
 
-3. 请求参数为xml
+请求参数为xml
 
 ```
 document.getElementById("mybutton").onclick = function() {
