@@ -38,7 +38,7 @@
 		 * 设置属性
 		 */
 		function setProperties(gxhr) {
-			if (plain.dataType)
+			if (plain.dataType && (plain.async == undefined ? true : plain.async)) //当同步调用时，responseType不能指定
 				gxhr.responseType = plain.dataType; // 设置服务器返回的数据类型
 			if (plain.wtimeout)
 				gxhr.timeout = plain.wtimeout; // 设置timeout时间
@@ -70,8 +70,10 @@
 			}
 
 			gxhr.onabort = function(ev) {
-				if (plain.error)
+				if (plain.error){
+					this.statusText = "用户停止操作";
 					plain.error.call(this, error(this), "download", ev);
+				}
 			}
 			gxhr.onerror = function(ev) {
 				if (plain.error)
@@ -79,7 +81,7 @@
 			}
 			gxhr.onload = function(ev) {
 
-				if (100 <= this.status < 399) { // 成功
+				if (100 <= this.status && this.status < 399) { // 成功
 					if (plain.success)
 						plain.success.call(this, this.response, "download", ev);
 				} else {// 失败
@@ -110,8 +112,10 @@
 			}
 
 			gxhr.upload.onabort = function(ev) {
-				if (plain.error)
+				if (plain.error){
+					this.statusText = "用户停止操作";
 					plain.error.call(this, error(this), "upload", ev);
+				}
 			}
 			gxhr.upload.onerror = function(ev) {
 				if (plain.error)
@@ -119,7 +123,7 @@
 			}
 			gxhr.upload.onload = function(ev) {
 
-				if (100 <= this.status < 399) { // 成功
+				if (100 <= this.status && this.status < 399) { // 成功
 					if (plain.success)
 						plain.success.call(this, this.response, "upload", ev);
 				} else {// 失败
@@ -203,7 +207,7 @@
 			setProperties(gxhr);
 			setCallback(gxhr);
 			gxhr.open(plain.type ? plain.type : "POST", plain.url,
-					plain.async ? plain.async : true, plain.username,
+					plain.async == undefined ? true : plain.async, plain.username,
 					plain.password);
 			gxhr.send(isPlainObject(plain.data) ? setPlainObjectData()
 					: plain.data);
